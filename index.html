@@ -1,245 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quicksell Guns & Ammo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        header {
-            background-color: #000000;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-            border-bottom: 4px solid #cc0000;
-            width: 100%;
-        }
-        .logo-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        nav {
-            background-color: #0d0d0d;
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-            border-bottom: 1px solid #2a2a2a;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin: 0 10px;
-        }
-        .dropbtn {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            padding: 12px 20px;
-            font-size: 15px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #1a1a1a;
-            min-width: 180px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
-            z-index: 1;
-            border: 1px solid #cc0000;
-        }
-        .dropdown-content a {
-            color: #ffffff;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-transform: uppercase;
-            font-size: 13px;
-            transition: background 0.2s ease;
-        }
-        .dropdown-content a:hover {
-            background-color: #cc0000;
-            color: #ffffff;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown:hover .dropbtn {
-            color: #cc0000;
-        }
-        .container {
-            max-width: 100%;
-            margin: 0;
-            padding: 40px 20px;
-            background-color: #1a1a1a;
-            box-sizing: border-box;
-            margin-bottom: 140px;
-        }
-        .info-wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .info-section {
-            margin-bottom: 35px;
-        }
-        .info-section h2 {
-            border-bottom: 2px solid #cc0000;
-            padding-bottom: 8px;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.6em;
-        }
-        .info-section p, .info-section li {
-            line-height: 1.8;
-            color: #b3b3b3;
-            font-size: 1.1em;
-        }
-        .info-section strong {
-            color: #ffffff;
-        }
-        
-        .catalog-display {
-            text-align: center;
-            padding: 30px;
-            background: #111;
-            border: 1px dashed #cc0000;
-            margin-top: 15px;
-            border-radius: 4px;
-        }
-        .catalog-img {
-            max-width: 100%;
-            max-height: 500px;
-            height: auto;
-            border: 2px solid #2a2a2a;
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .legal-disclaimer {
-            border-top: 1px solid #333;
-            padding-top: 20px;
-            margin-top: 40px;
-            font-size: 0.85em;
-            color: #888888;
-            line-height: 1.6;
-            text-align: justify;
-        }
-        footer {
-            background-color: #0d0d0d;
-            color: #666666;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #2a2a2a;
-            font-size: 0.85em;
-            box-sizing: border-box;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <img src="Screenshot_20261108_193543_Gmail.jpg" alt="Quicksell Guns & Ammo Header Banner" class="logo-img">
-</header>
-
-<nav>
-    <div class="dropdown">
-        <button class="dropbtn">Firearms</button>
-        <div class="dropdown-content">
-            <a href="#" onclick="showCategory('Handguns', 'In-stock inventory changes daily. Visit the shop or call for active revolver and semi-automatic pistol selections.', '')">Handguns</a>
-            <a href="#" onclick="showCategory('Rifles', 'Precision bolt-action, hunting, and sporting rifles available. Custom configurations built to order.', '')">Rifles</a>
-            <a href="#" onclick="showCategory('Shotguns', 'Home defense, hunting, and tactical 12-gauge and 20-gauge options available.', '')">Shotguns</a>
-        </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn">NFA Items</button>
-        <div class="dropdown-content">
-            <a href="#" onclick="showCategory('Suppressors', 'Class 3 NFA suppressors on hand. Complete Form 4 registry and tax stamp filing assistance provided.', '')">Suppressors</a>
-            <a href="#" onclick="showCategory('SBRs / SBSs', 'Short-barreled rifles and tactical specialty platforms built to specifications.', '')">SBRs / SBSs</a>
-        </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn">Services</button>
-        <div class="dropdown-content">
-            <a href="#" onclick="showCategory('Barrel Threading', 'Professional lathe threading for suppressors, muzzle devices, and custom brakes on all barrel models.', '')">Barrel Threading</a>
-            <a href="#" onclick="showCategory('Custom Gunsmithing', 'Complete custom work on historic, classic, and new platforms including slide modifications, sight installs, and triggers.', '')">Custom Gunsmithing</a>
-        </div>
-    </div>
-</nav>
-
-<div class="container">
-    <div class="info-wrapper">
-        
-        <!-- Dynamic Content Display Section -->
-        <div id="dynamic-content-box" class="info-section" style="display:none;">
-            <h2 id="category-title">Category Name</h2>
-            <div class="catalog-display">
-                <img id="category-image" src="" alt="Inventory Image" class="catalog-img">
-                <p id="category-description">Details about the inventory go here...</p>
-            </div>
-        </div>
-
-        <div class="info-section">
-            <h2>About Us</h2>
-            <p>Quicksell Guns & Ammo is a licensed FFL dealer and professional gunsmithing shop based in Westport, Indiana. As a licensed SOT holder, we specialize in the sale and transfer of suppressors and other Class 3 NFA items. From expert barrel threading to precision custom work on both new and historic firearms, we handle your hardware with unmatched trade expertise.</p>
-        </div>
-
-        <div class="info-section">
-            <h2>Location & Contact</h2>
-            <p><strong>Address:</strong> 13608 ST RD 3 SOUTH, Westport, IN 47283</p>
-            <p><strong>Phone:</strong> (812) 591-3161</p>
-        </div>
-
-        <div class="info-section">
-            <h2>Operating Hours</h2>
-            <ul>
-                <li><strong>Monday - Friday:</strong> 8:00 AM - 5:30 PM</li>
-                <li><strong>Saturday:</strong> 8:00 AM - 5:30 PM</li>
-                <li><strong>Sunday:</strong> Closed</li>
-            </ul>
-        </div>
-
-        <div class="legal-disclaimer">
-            <p><strong>LEGAL DISCLAIMER:</strong> All firearm and NFA transfers, sales, and gunsmithing services are conducted strictly in compliance with federal, state, and local laws, including ATF regulations. Purchasers must successfully satisfy all local regulatory checks and federal NFA background criteria where applicable. Suppressors and Class 3 NFA items are strictly restricted and subject to specific application rules, registry filing, and tax stamp parameters before physical possession is transferred. This informational website does not directly process internet commerce or transactions.</p>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <p>&copy; 2026 Quicksell Guns & Ammo. All Rights Reserved.</p>
-</footer>
-
-<script>
-    function showCategory(title, description, imageSrc) {
-        document.getElementById('dynamic-content-box').style.display = 'block';
-        document.getElementById('category-title').innerText = title;
-        document.getElementById('category-description').innerText = description;
-        
-        var imgElement = document.getElementById('category-image');
-        if(imageSrc !== '') {
-            imgElement.src = imageSrc;
-            imgElement.style.display = 'inline-block';
-        } else {
-            imgElement.src = '';
-            imgElement.style.display = 'none';
-        }
-        
-        document.getElementById('dynamic-content-box').scrollIntoView({ behavior: 'smooth' });
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments | Windows Photo Mode Utility</title>
+<meta name="description" content="hellraiser-revival-photo-mode-tool is a photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows. Download it, set up your camera profiles, and capture cinematic screenshots in minutes.">
+<meta name="keywords" content="camera, capture, gaming-tools, graphics, hellraiser, hellraiser-revival, pc-gaming, photo-mode, screenshot, windows, photo mode tool, screenshot utility">
+<meta name="robots" content="index, follow">
+<meta name="author" content="hellraiser-revival-photo-mode-tool">
+<meta name="theme-color" content="#2b1b3d">
+<link rel="canonical" href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments">
+<meta property="og:description" content="A photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows. Simple download, simple setup, better screenshots.">
+<meta property="og:url" content="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases">
+<meta property="og:site_name" content="hellraiser-revival-photo-mode-tool">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments">
+<meta name="twitter:description" content="Photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hellraiser-revival-photo-mode-tool",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Windows",
+  "description": "Photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows.",
+  "url": "https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
 </script>
+</head>
+<body style="margin:0; padding:0; background:#f4f1f7; color:#241c2e; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased;">
+
+<div style="max-width:860px; margin:0 auto; padding:28px 20px 70px 20px;">
+
+  <header style="background:#ffffff; border-radius:18px; padding:38px 30px; box-shadow:0 10px 30px rgba(43,27,61,0.10); border:1px solid #e7e0ef; text-align:center;">
+
+    <h1 style="margin:0 0 18px 0; font-size:2rem; line-height:1.3; font-weight:800; letter-spacing:-0.4px; color:#2b1b3d;">🎬 hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments</h1>
+
+    <p style="margin:0 0 26px 0; font-size:1.06rem; color:#4a3d58;">A friendly photo-mode companion for Clive Barker's Hellraiser: Revival on Windows. Save camera setups, snap clean screenshots, and keep your best shots organised — no technical knowledge required.</p>
+
+    <a href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases"
+       style="display:inline-block; background:linear-gradient(135deg, #7b2ff7 0%, #f107a3 55%, #ff8a00 100%); color:#ffffff; text-decoration:none; font-weight:700; font-size:1.05rem; padding:16px 38px; border-radius:999px; box-shadow:0 8px 20px rgba(123,47,247,0.35); letter-spacing:0.2px;">
+      ⬇ Download hellraiser-revival-photo-mode-tool
+    </a>
+
+    <p style="margin:18px 0 0 0; font-size:0.9rem; color:#7a6b8a;">Windows • Free to download • Takes about two minutes to set up</p>
+
+  </header>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 14px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">✨ What This Tool Does</h2>
+
+    <p style="margin:0 0 14px 0;">Hellraiser: Revival is full of dark corridors, dramatic lighting, and unforgettable characters. Getting a great screenshot out of a scene like that usually means fiddling with the camera again and again, losing your position, and forgetting which settings looked best.</p>
+
+    <p style="margin:0 0 14px 0;">This utility is built around that exact problem. It is a photo-oriented camera and screenshot profile tool. In plain terms: you set up the camera and capture settings you like once, save them as a profile, and then reuse that profile whenever you want. The same framing, the same look, the same result — without starting from scratch each time.</p>
+
+    <p style="margin:0;">It runs alongside the game on Windows, keeps things simple, and is designed for players who want beautiful screenshots rather than a complicated settings panel.</p>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments | Windows Photo Mode Utility</title>
+<meta name="description" content="hellraiser-revival-photo-mode-tool is a photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows. Download it, save your camera profiles, and capture cinematic screenshots in minutes.">
+<meta name="keywords" content="camera, capture, gaming-tools, graphics, hellraiser, hellraiser-revival, pc-gaming, photo-mode, screenshot, windows, photo mode tool, screenshot utility, camera profiles">
+<meta name="robots" content="index, follow">
+<meta name="author" content="hellraiser-revival-photo-mode-tool">
+<meta name="theme-color" content="#2b1b3d">
+<link rel="canonical" href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments">
+<meta property="og:description" content="A photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows. Simple download, simple setup, better screenshots.">
+<meta property="og:url" content="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases">
+<meta property="og:site_name" content="hellraiser-revival-photo-mode-tool">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments">
+<meta name="twitter:description" content="Photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "hellraiser-revival-photo-mode-tool",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Windows",
+  "description": "Photo-oriented camera and screenshot profile utility for Clive Barker's Hellraiser: Revival on Windows.",
+  "url": "https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+<body style="margin:0; padding:0; background:#f4f1f7; color:#241c2e; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size:17px; line-height:1.75; -webkit-font-smoothing:antialiased;">
+
+<div style="max-width:860px; margin:0 auto; padding:28px 20px 70px 20px;">
+
+  <header style="background:#ffffff; border-radius:18px; padding:38px 30px; box-shadow:0 10px 30px rgba(43,27,61,0.10); border:1px solid #e7e0ef; text-align:center;">
+
+    <h1 style="margin:0 0 18px 0; font-size:2rem; line-height:1.3; font-weight:800; letter-spacing:-0.4px; color:#2b1b3d;">🎬 hellraiser-revival-photo-mode-tool - Capture Stunning Hellraiser Moments</h1>
+
+    <p style="margin:0 0 26px 0; font-size:1.06rem; color:#4a3d58;">A friendly photo-mode companion for Clive Barker's Hellraiser: Revival on Windows. Save camera setups, snap clean screenshots, and keep your best shots organised — no technical knowledge required.</p>
+
+    <a href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases"
+       style="display:inline-block; background:linear-gradient(135deg, #7b2ff7 0%, #f107a3 55%, #ff8a00 100%); color:#ffffff; text-decoration:none; font-weight:700; font-size:1.05rem; padding:16px 38px; border-radius:999px; box-shadow:0 8px 20px rgba(123,47,247,0.35); letter-spacing:0.2px;">
+      ⬇ Download hellraiser-revival-photo-mode-tool
+    </a>
+
+    <p style="margin:18px 0 0 0; font-size:0.9rem; color:#7a6b8a;">Windows • Free to download • Takes about two minutes to set up</p>
+
+  </header>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 14px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">✨ What This Tool Does</h2>
+
+    <p style="margin:0 0 16px 0;">Hellraiser: Revival is full of dark corridors, dramatic lighting, and unforgettable characters. Getting a great screenshot out of a scene like that usually means fiddling with the camera again and again, losing your position, and forgetting which settings looked best.</p>
+
+    <p style="margin:0 0 16px 0;">This utility is built around that exact problem. It is a photo-oriented camera and screenshot profile tool. In plain terms: you set up the camera and capture settings you like once, save them as a profile, and then reuse that profile whenever you want. The same framing, the same look, the same result — without starting from scratch each time.</p>
+
+    <p style="margin:0;">It runs alongside the game on Windows, keeps things simple, and is designed for players who want beautiful screenshots rather than a complicated settings panel.</p>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">📸 Main Features</h2>
+
+    <div style="margin:0 0 18px 0; padding:16px 18px; background:#faf8fd; border-radius:12px; border-left:4px solid #7b2ff7;">
+      <strong style="color:#2b1b3d;">Camera profiles</strong>
+      <p style="margin:6px 0 0 0; color:#4a3d58;">Set your camera position, angle, and distance the way you like it, then save it as a named profile. Switch between profiles instantly instead of rebuilding your shot every time.</p>
+    </div>
+
+    <div style="margin:0 0 18px 0; padding:16px 18px; background:#faf8fd; border-radius:12px; border-left:4px solid #f107a3;">
+      <strong style="color:#2b1b3d;">Screenshot capture</strong>
+      <p style="margin:6px 0 0 0; color:#4a3d58;">Take clean screenshots of the current view without extra clutter on screen. Your images are saved to a folder you choose, so nothing gets lost in the game directory.</p>
+    </div>
+
+    <div style="margin:0 0 18px 0; padding:16px 18px; background:#faf8fd; border-radius:12px; border-left:4px solid #ff8a00;">
+      <strong style="color:#2b1b3d;">Preset management</strong>
+      <p style="margin:6px 0 0 0; color:#4a3d58;">Keep multiple profiles for different moods — a tight character portrait, a wide atmosphere shot, a low-angle drama shot. Rename them, duplicate them, and delete the ones you no longer use.</p>
+    </div>
+
+    <div style="margin:0 0 18px 0; padding:16px 18px; background:#faf8fd; border-radius:12px; border-left:4px solid #3fa9f5;">
+      <strong style="color:#2b1b3d;">Screenshot review</strong>
+      <p style="margin:6px 0 0 0; color:#4a3d58;">Look through the shots you just took without leaving the tool, so you can decide immediately whether a scene needs one more attempt.</p>
+    </div>
+
+    <div style="margin:0; padding:16px 18px; background:#faf8fd; border-radius:12px; border-left:4px solid #35c07a;">
+      <strong style="color:#2b1b3d;">Simple Windows setup</strong>
+      <p style="margin:6px 0 0 0; color:#4a3d58;">No developer tools, no command line, no separate runtime to hunt down. Download, open, and use it alongside the game.</p>
+    </div>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">⚙️ Before You Begin</h2>
+
+    <p style="margin:0 0 16px 0;">You do not need to install anything unusual to use this tool. It is intended for normal home computers running Windows. To get the best experience, check the following:</p>
+
+    <ul style="margin:0 0 0 0; padding-left:22px; color:#4a3d58;">
+      <li style="margin-bottom:10px;"><strong style="color:#2b1b3d;">Windows 10 or Windows 11</strong> on a 64-bit computer.</li>
+      <li style="margin-bottom:10px;">A working installation of <strong style="color:#2b1b3d;">Clive Barker's Hellraiser: Revival</strong> on the same PC.</li>
+      <li style="margin-bottom:10px;">Roughly <strong style="color:#2b1b3d;">200 MB of free disk space</strong> for the tool and a folder for your screenshots.</li>
+      <li style="margin-bottom:10px;">A screen resolution of <strong style="color:#2b1b3d;">1920×1080 or higher</strong> so your captures look sharp.</li>
+      <li style="margin-bottom:0;">An internet connection for the download itself — the tool works offline once it is on your computer.</li>
+    </ul>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">🚀 Getting Started: Download and Run</h2>
+
+    <p style="margin:0 0 18px 0;">Everything happens on one page, and the whole process is a handful of clicks. Follow these steps in order and you will be capturing screenshots in a couple of minutes.</p>
+
+    <div style="background:#faf8fd; border-radius:14px; padding:22px; border:1px solid #ece5f4; margin-bottom:22px;">
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 1 — Visit the download page</strong></p>
+      <p style="margin:0 0 20px 0; color:#4a3d58;">Visit this link to download the application. It opens the releases page for hellraiser-revival-photo-mode-tool, where the latest version of the tool is always listed first.</p>
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 2 — Pick the newest release</strong></p>
+      <p style="margin:0 0 20px 0; color:#4a3d58;">At the top of that page you will see the most recent release with a version number and a date. Always take the newest one — it contains the most recent fixes and works best with the current game build. Older releases sit further down the page and are only useful if you specifically need them.</p>
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 3 — Download the Windows file</strong></p>
+      <p style="margin:0 0 20px 0; color:#4a3d58;">Under the release description there is a list of downloadable files. Choose the Windows file for this tool. Your browser will ask where to save it — the Downloads folder is fine. Wait for the download to finish completely before opening anything.</p>
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 4 — Get past the Windows safety prompt</strong></p>
+      <p style="margin:0 0 20px 0; color:#4a3d58;">Windows sometimes shows a blue "Windows protected your PC" box for software it has not seen before. If that appears, click "More info" and then "Run anyway". This is normal for small independent tools and is not a sign that something is wrong. You can also right-click the downloaded file, open Properties, tick "Unblock" at the bottom, and click OK.</p>
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 5 — Open the tool</strong></p>
+      <p style="margin:0 0 20px 0; color:#4a3d58;">Double-click the file you downloaded. If it is a folder, open it and double-click the application inside. A small window will appear — that is the tool. You do not need to install anything else or restart your computer.</p>
+
+      <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d; font-size:1.05rem;">Step 6 — Start the game and take your first shot</strong></p>
+      <p style="margin:0 0 0 0; color:#4a3d58;">Launch Hellraiser: Revival, walk to a view you like, and open photo mode in the game. Switch to the tool window, choose a capture folder, and save your first camera profile. From then on you can recall that exact framing in one click.</p>
+
+    </div>
+
+    <div style="text-align:center;">
+      <a href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases"
+         style="display:inline-block; background:linear-gradient(135deg, #00c6ff 0%, #7b2ff7 50%, #ff5f6d 100%); color:#ffffff; text-decoration:none; font-weight:700; font-size:1rem; padding:15px 34px; border-radius:999px; box-shadow:0 8px 20px rgba(0,198,255,0.30);">
+        Visit the download page
+      </a>
+    </div>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">🖱 How to Use It Day to Day</h2>
+
+    <p style="margin:0 0 16px 0;">Once the tool is open, the routine is short and repeatable.</p>
+
+    <ol style="margin:0; padding-left:22px; color:#4a3d58;">
+      <li style="margin-bottom:12px;"><strong style="color:#2b1b3d;">Set your shot up.</strong> In the game, move the photo-mode camera until the framing, height, and angle look right to you.</li>
+      <li style="margin-bottom:12px;"><strong style="color:#2b1b3d;">Save it as a profile.</strong> In the tool, create a new profile and give it a name you will recognise later — "Chapel Low Angle", "Hallway Wide", "Pinhead Portrait".</li>
+      <li style="margin-bottom:12px;"><strong style="color:#2b1b3d;">Capture.</strong> Use the capture button to save a screenshot to the folder you selected. The image is saved immediately and clearly named.</li>
+      <li style="margin-bottom:12px;"><strong style="color:#2b1b3d;">Review.</strong> Open the built-in review panel. If the shot needs work, adjust and capture again — your profile stays as it was.</li>
+      <li style="margin-bottom:0;"><strong style="color:#2b1b3d;">Reuse later.</strong> Next session, load the profile and you are back to the exact same setup in one click.</li>
+    </ol>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">🛠 Troubleshooting</h2>
+
+    <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d;">The file will not open.</strong> Make sure the download finished fully — a partial download cannot run. Delete it and download again from the releases page.</p>
+
+    <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d;">Windows blocks it every time.</strong> Right-click the file, open Properties, tick "Unblock", then click OK and try again.</p>
+
+    <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d;">Screenshots land in the wrong place.</strong> Open the tool's capture folder setting and point it somewhere easy to find, such as a dedicated folder inside Pictures.</p>
+
+    <p style="margin:0 0 12px 0;"><strong style="color:#2b1b3d;">The tool window is hidden behind the game.</strong> Run the game in windowed or borderless mode, or use Alt+Tab to switch to the tool window.</p>
+
+    <p style="margin:0;"><strong style="color:#2b1b3d;">Something looks off after a game update.</strong> Check the releases page for a newer version of the tool first — that resolves most issues after a game patch.</p>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">💡 Tips for Better Screenshots</h2>
+
+    <p style="margin:0 0 12px 0;">Give your profile names that describe the mood, not the location. Locations change as you play; moods are reusable.</p>
+
+    <p style="margin:0 0 12px 0;">Keep one profile deliberately loose and wide, and one deliberately tight. Most great screenshots are a variation of one of those two shapes.</p>
+
+    <p style="margin:0 0 12px 0;">Take several captures of the same setup rather than one. Small changes in lighting and character pose make a big difference between frames.</p>
+
+    <p style="margin:0;">Back up your profile folder occasionally if you have built up a collection you care about, so a reinstall never costs you your favourite setups.</p>
+
+  </section>
+
+  <section style="background:#ffffff; border-radius:18px; padding:30px; margin-top:26px; box-shadow:0 6px 22px rgba(43,27,61,0.07); border:1px solid #e7e0ef;">
+
+    <h2 style="margin:0 0 16px 0; font-size:1.45rem; font-weight:750; color:#2b1b3d; letter-spacing:-0.2px;">❓ Questions People Ask</h2>
+
+    <p style="margin:0 0 6px 0;"><strong style="color:#2b1b3d;">Is this a full game?</strong></p>
+    <p style="margin:0 0 16px 0; color:#4a3d58;">No. It is a small utility that supports photo mode in Clive Barker's Hellraiser: Revival. You still need the game itself.</p>
+
+    <p style="margin:0 0 6px 0;"><strong style="color:#2b1b3d;">Do I need to know how to code?</strong></p>
+    <p style="margin:0 0 16px 0; color:#4a3d58;">Not at all. If you can download a file and double-click it, you can use this.</p>
+
+    <p style="margin:0 0 6px 0;"><strong style="color:#2b1b3d;">Does it work on Mac or Linux?</strong></p>
+    <p style="margin:0 0 16px 0; color:#4a3d58;">It is built for Windows. On other systems it will not run natively.</p>
+
+    <p style="margin:0 0 6px 0;"><strong style="color:#2b1b3d;">Is my money required?</strong></p>
+    <p style="margin:0 0 16px 0; color:#4a3d58;">No, the download is free.</p>
+
+    <p style="margin:0 0 6px 0;"><strong style="color:#2b1b3d;">Where do I get updates?</strong></p>
+    <p style="margin:0; color:#4a3d58;">The same releases page. It always lists the newest version at the top, so it is worth a quick check after a game patch.</p>
+
+  </section>
+
+  <section style="background:#2b1b3d; border-radius:18px; padding:34px 30px; margin-top:26px; box-shadow:0 10px 30px rgba(43,27,61,0.20); text-align:center;">
+
+    <h2 style="margin:0 0 14px 0; font-size:1.35rem; font-weight:750; color:#ffffff; letter-spacing:-0.2px;">⬇ Ready to Capture?</h2>
+
+    <p style="margin:0 0 22px 0; color:#d6cbe3;">Visit this link to download the application, then follow the six steps above. Your first saved camera profile is only a few minutes away.</p>
+
+    <a href="https://github.com/valentiinvm51/hellraiser-revival-photo-mode-tool/releases"
+       style="display:inline-block; background:linear-gradient(135deg, #ff8a00 0%, #f107a3 50%, #7b2ff7 100%); color:#ffffff; text-decoration:none; font-weight:700; font-size:1rem; padding:15px 34px; border-radius:999px; box-shadow:0 8px 22px rgba(241,7,163,0.35);">
+      Go to the download page
+    </a>
+
+  </section>
+
+  <footer style="margin-top:30px; text-align:center; color:#8a7a9b; font-size:0.88rem;">
+    <p style="margin:0 0 6px 0;">hellraiser-revival-photo-mode-tool — a photo-oriented camera and screenshot profile utility for Windows.</p>
+    <p style="margin:0;">An unofficial fan-made companion tool. Not affiliated with or endorsed by the game's developers or publishers.</p>
+  </footer>
+
+</div>
 
 </body>
 </html>
